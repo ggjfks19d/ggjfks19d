@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //----------------------------------------------------------------------------------------------------
 // ゲームの流れを管理する  
@@ -41,11 +42,57 @@ public class SysManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	IEnumerator Start()
 	{
+		SceneManager.LoadScene("Title");
+		yield return null;
 
-
-		while(true) 
-		{
-			yield return null;
-		}
+		//while(true) 
+		//{
+		//	yield return null;
+		//}
 	}
+
+	//--------------------------------------------------------------------------------
+	// タイトル画面へ  
+	//--------------------------------------------------------------------------------
+	public static void GoToTitle()
+	{
+		// 全てのBGMを止める 
+		SoundManager.StopBGM();
+
+		// フェードしてタイトルへ 
+		FadeManager.FadeOut(FADE_SPEED, 
+			()=>{
+				SceneManager.LoadScene("Title");
+				FadeManager.FadeIn(FADE_SPEED);
+			}
+		);
+	}
+
+	//--------------------------------------------------------------------------------
+	// メイン画面へ  
+	//--------------------------------------------------------------------------------
+	public static void GoToMain()
+	{
+		// フェードしてメインへ 
+		FadeManager.FadeOut(FADE_SPEED,
+			() => {
+				SceneManager.LoadScene("Main");
+				FadeManager.FadeIn(FADE_SPEED);
+			}
+		);
+	}
+
+	//--------------------------------------------------------------------------------
+	// リザルト表示 
+	//--------------------------------------------------------------------------------
+	public static void GoToResult()
+	{
+		// リザルト情報を表示する 
+		SceneManager.LoadScene("Result", LoadSceneMode.Additive);
+	}
+
+	//--------------------------------------------------------------------------------
+	// 定数  
+	//--------------------------------------------------------------------------------
+	const float FADE_SPEED = 1.5f;
 }
