@@ -59,7 +59,25 @@ public class Enemy : MonoBehaviour
     }
     void GenerateDown()
     {
+        float x = Random.Range(-sx / 2, sx / 2);
+        float y = Random.Range(-sy / 2, -sy);
 
+        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
 
     }
+    void GenerateLeft()
+    {
+        float x = Random.Range(-sx, -sx / 2);
+        float y = Random.Range(sy / 2, -sy / 2);
+
+        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+    }
+    void GenerateRight()
+    {
+        float x = Random.Range(sx, sx / 2);
+        float y = Random.Range(sy / 2, -sy / 2);
+
+        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+    }
+
 }
