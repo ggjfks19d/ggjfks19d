@@ -23,12 +23,11 @@ public class SoundManager : MonoBehaviour
 	{
 		START,		// ゲーム開始音 
 		WALK,		// 歩く 
-		WALKSNOW,   // 雪の上を歩く 
 		ATTACK,		// 攻撃(鼻息) 
 		HIT,		// 攻撃ヒット 
 		GET,		// 枝ゲット 
 		DAMAGE,		// ダメージを受ける 
-		RESULT,		// 結果表示(やられ) 
+		LVUP,		// レベルアップ 
 		FIRE,		// 火に枝を追加 
 	}
 
@@ -74,7 +73,8 @@ public class SoundManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	public static void PlaySE(SE se)
 	{
-		instance.seList[(int)se].Play();
+		AudioSource a = instance.seList[(int)se];
+		if(a != null) { a.Play(); }
 	}
 
 
@@ -85,7 +85,9 @@ public class SoundManager : MonoBehaviour
 	public static void PlayBGM(BGM bgm, bool isMix = false)
 	{
 		if(!isMix){ StopBGM(); }
-		instance.bgmList[(int)bgm].Play();
+
+		AudioSource a = instance.bgmList[(int)bgm];
+		if(a != null){ a.Play(); }
 	}
 
 
@@ -95,12 +97,14 @@ public class SoundManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	public static void StopBGM()
 	{
-		for(int i = 0; i < FCEI.Enums<BGM>.Length; i++) {
+		for(int i = 0; i < FCEI.Enums<BGM>.Length; i++)
+		{
 			StopBGM((BGM)i);
 		}
 	}
 	public static void StopBGM(BGM bgm)
 	{
-		instance.bgmList[(int)bgm].Stop();
+		AudioSource a = instance.bgmList[(int)bgm];
+		if(a != null){ a.Stop(); }
 	}
 }
