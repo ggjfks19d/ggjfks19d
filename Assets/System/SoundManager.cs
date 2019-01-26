@@ -1,10 +1,10 @@
 ﻿// SoundManager.cs 
 //
-// @idev Unity2017.1.0f3 / MonoDevelop5.9.6
+// @idev Unity2018.3.2f1 / VisualStudio 2017
 // @auth FCEI.No-Va
-// @date 2017/08/19
+// @date 2017/01/27
 //
-// Copyright (C) 2017 FlyteCatEmotion Inc.
+// Copyright (C) 2019 FlyteCatEmotion Inc.
 // All Rights Reserved.
 //------------------------------------------------------------------------------------------------------------------------
 using System.Collections;
@@ -71,10 +71,12 @@ public class SoundManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	// SE再生 
 	//--------------------------------------------------------------------------------
-	public static void PlaySE(SE se)
+	public static void PlaySE(SE id)
 	{
-		AudioSource a = instance.seList[(int)se];
-		if(a != null) { a.Play(); }
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
+		AudioSource a = instance.seList[(int)id];
+		if(a != null && a.clip != null) { a.Play(); }
 	}
 
 
@@ -82,12 +84,14 @@ public class SoundManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	// BGM再生 
 	//--------------------------------------------------------------------------------
-	public static void PlayBGM(BGM bgm, bool isMix = false)
+	public static void PlayBGM(BGM id, bool isMix = false)
 	{
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
 		if(!isMix){ StopBGM(); }
 
-		AudioSource a = instance.bgmList[(int)bgm];
-		if(a != null){ a.Play(); }
+		AudioSource a = instance.bgmList[(int)id];
+		if(a != null && a.clip != null) { a.Play(); }
 	}
 
 
@@ -97,14 +101,55 @@ public class SoundManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	public static void StopBGM()
 	{
-		for(int i = 0; i < FCEI.Enums<BGM>.Length; i++)
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
+		// すべて停止 
+		for(int i=0; i<instance.bgmList.Length; i++)
 		{
 			StopBGM((BGM)i);
 		}
 	}
-	public static void StopBGM(BGM bgm)
+	public static void StopBGM(BGM id)
 	{
-		AudioSource a = instance.bgmList[(int)bgm];
-		if(a != null){ a.Stop(); }
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
+		AudioSource a = instance.bgmList[(int)id];
+		if(a != null && a.clip != null){ a.Stop(); }
+	}
+
+
+
+	//--------------------------------------------------------------------------------
+	// AudioSourcce生成 
+	//--------------------------------------------------------------------------------
+	[SerializeField]Transform seRoot;
+	[SerializeField]Transform bgmRoot;
+	[ContextMenu("EXEC_GenerateAudioSource")]
+	void GenerateAudioSource()
+	{
+		FCEI.Util.ClearChild(seRoot.gameObject);
+		FCEI.Util.ClearChild(bgmRoot.gameObject);
+
+		// SEのAudioSouece生成 
+		this.seList = new AudioSource[FCEI.Enums<SE>.Length];
+		for(int i=0; i<FCEI.Enums<SE>.Length; i++)
+		{
+			GameObject obj = new GameObject(((SE)i).ToString());
+			obj.transform.parent = seRoot;
+			AudioSource source = obj.AddComponent<AudioSource>();
+			source.playOnAwake = false;
+			this.seList[i] = source;
+		}
+
+		// BGMのAudioSouece生成 
+		this.bgmList = new AudioSource[FCEI.Enums<BGM>.Length];
+		for(int i=0; i<FCEI.Enums<BGM>.Length; i++) {
+			GameObject obj = new GameObject(((BGM)i).ToString());
+			obj.transform.parent = bgmRoot;
+			AudioSource source = obj.AddComponent<AudioSource>();
+			source.playOnAwake = false;
+			source.loop = true;
+			this.bgmList[i] = source;
+		}
 	}
 }
