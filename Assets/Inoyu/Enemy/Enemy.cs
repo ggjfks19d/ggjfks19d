@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject Cube;
-    float time = 1;
+    public GameObject cube;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        float x = Random.Range(-5.0f, 5.0f);
+        float y = Random.Range(-5.0f, 5.0f);
+
+
+        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
     }
 
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-        if(time <= 0)
-        {
-            Vector3 CreatePoint = new Vector3(Random.Range(0, 9),0, Random.Range(0,9));
-            Instantiate(Cube, CreatePoint, Quaternion.identity);
-            time = 1;
-        }
+
     }
 }
