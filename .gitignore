@@ -5,3 +5,5 @@ obj/
 .vs/
 *.sln
 *.csproj
+Assets/Sound/
+Assets/Sound.meta
