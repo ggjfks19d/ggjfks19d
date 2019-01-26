@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject Cube;
-    float time = 3;
+    float time = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +18,9 @@ public class Enemy : MonoBehaviour
         time -= Time.deltaTime;
         if(time <= 0)
         {
-            Vector2 CreatePoint = new Vector2(Random.Range(0, 5), Random.Range(0,5));
+            Vector3 CreatePoint = new Vector3(Random.Range(0, 9),0, Random.Range(0,9));
             Instantiate(Cube, CreatePoint, Quaternion.identity);
-            time = 3;
+            time = 1;
         }
     }
 }
