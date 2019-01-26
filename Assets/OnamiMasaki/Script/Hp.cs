@@ -19,34 +19,47 @@ public class Hp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_Hp = 0.0f;
+        //m_Hp = 0.0f;
         if (m_healFlg && m_Slider.value < 1.0f)
         {
-            m_Hp = 0.001f;
+            m_Hp = 0.005f;
+        }
+        if (!m_healFlg)
+        {
+            m_Hp = -0.001f;
         }
 
         m_Slider.value += m_Hp;
 
+        //m_healFlg = false;
     }
 
-    void OnTriggerEnter(Collider other)
+    //焚火の範囲内なら回復フラグをtrueにする。
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             m_healFlg = true;
+
             Debug.Log("player");
         }
-        else
+        //else
+        //{
+        //    Debug.Log("hit");
+        //}
+    }
+
+    //焚火の範囲外なら回復フラグをfalseにする。
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
         {
-            Debug.Log("hit");
+            m_healFlg = false;
         }
     }
 
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if(other.gameObject.tag == "Player")
-    //    {
-    //        m_healFlg = false;
-    //    }
-    //}
+    void OnGUI()
+    {
+        GUILayout.Button(m_Hp.ToString());
+    }
 }
