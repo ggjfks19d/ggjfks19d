@@ -20,14 +20,15 @@ public class MoveScript : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0)
         {
             transform.position += new Vector3((Input.GetAxis("Horizontal") * speed * Time.deltaTime), 0.0f, 0.0f);
-        }
-
+        }   
+           
         //縦に移動
         if (Input.GetAxis("Vertical") != 0)
         {
             transform.position += new Vector3(0.0f, 0.0f, (Input.GetAxis("Vertical") * speed * Time.deltaTime));
         }
-
+        
+        //Aボタンが押されたらBlowという球体を打ち出してあげたい！
         if (Input.GetButtonDown("Fire1"))
         {
             Blow = Instantiate(Blow, transform.position + transform.forward * 3 + transform.up * 2, transform.rotation) as GameObject;
