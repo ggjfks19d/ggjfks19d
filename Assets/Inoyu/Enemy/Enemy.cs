@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Vector3 tmp = GameObject.Find("Player").transform.position;
+         
         //GameObject.Find("Player").transform.position = new Vector3(tmp.x, tmp.y, tmp.z);
-        //int num = cube.GetComponent
+
 
         for (int i = 0; i< 10; i++) {
 
