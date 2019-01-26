@@ -9,11 +9,13 @@ public class Rock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float x = Random.Range(-5.0f, 5.0f);
-        float y = Random.Range(-5.0f, 5.0f);
+        for (int i = 0; i < 10; i++)
+        {
+            float x = Random.Range(-5.0f, 5.0f);
+            float y = Random.Range(-5.0f, 5.0f);
 
-
-        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+            Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        }
     }
 
     // Update is called once per frame
