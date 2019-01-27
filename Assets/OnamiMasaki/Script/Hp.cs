@@ -55,7 +55,13 @@ public class Hp : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            m_healFlg = true;
+			if(!m_healFlg) 
+			{
+				SoundManager.StopBGM();
+				SoundManager.PlayBGM(SoundManager.BGM.HOME);
+			}
+
+			m_healFlg = true;
 
             Debug.Log("player");
         }
@@ -71,8 +77,11 @@ public class Hp : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             m_healFlg = false;
-        }
-    }
+
+			SoundManager.StopBGM();
+			SoundManager.PlayBGM(SoundManager.BGM.MAIN);
+		}
+	}
 
     void OnGUI()
     {
