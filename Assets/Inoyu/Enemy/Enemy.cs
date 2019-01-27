@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
     Transform t;
     private Vector3 playerpos;
 
-    float sx = Screen.width;
-    float sy = Screen.height;
+    [SerializeField]float sx;
+    [SerializeField]float sy;
 
     //初期化処理
     void Start()
@@ -65,11 +65,13 @@ public class Enemy : MonoBehaviour
         Instantiate(cube, new Vector2(x, y), Quaternion.identity);
 
     }
+    [ContextMenu("EXEC_GenerateLeft")]
     void GenerateLeft()
     {
         float x = Random.Range(-sx, -sx / 2);
         float y = Random.Range(sy / 2, -sy / 2);
 
+        Debug.Log("sx:" + sx + " sy:" + sy);
         Instantiate(cube, new Vector2(x, y), Quaternion.identity);
     }
     void GenerateRight()
