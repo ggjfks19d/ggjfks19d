@@ -13,7 +13,7 @@ public class Hp : MonoBehaviour
     bool m_healFlg = false;
     int m_Count = 0;
 
-    float dbgPreSliderValue;
+    //float dbgPreSliderValue;
 
     // Start is called before the first frame update
     void Start()

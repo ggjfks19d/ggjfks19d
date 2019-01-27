@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: 99793a7d4435a40429b20affdd73215b
+guid: dafcf518442fed048a9bc2979e482bdd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cube: {fileID: 8731632286857426706, guid: f80952fdb65bad4429b8cad7fb1ad7a4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -14,7 +14,7 @@ public class Branch : MonoBehaviour
             float x = Random.Range(-5.0f, 5.0f);
             float y = Random.Range(-5.0f, 5.0f);
 
-            Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+            Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
         }
     }
 

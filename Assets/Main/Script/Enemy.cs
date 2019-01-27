@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
             float x = Random.Range(-5.0f, 5.0f);
             float y = Random.Range(-5.0f, 5.0f);
 
-            Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+            Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
 
         }
 
@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         float y = Random.Range(sy / 2, sy);
 
 
-        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
 
     }
     void GenerateDown()
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
         float x = Random.Range(-sx / 2, sx / 2);
         float y = Random.Range(-sy / 2, -sy);
 
-        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
 
     }
     [ContextMenu("EXEC_GenerateLeft")]
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         float y = Random.Range(sy / 2, -sy / 2);
 
         Debug.Log("sx:" + sx + " sy:" + sy);
-        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
     }
     void GenerateRight()
     {
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
         float x = Random.Range(sx, sx / 2);
         float y = Random.Range(sy / 2, -sy / 2);
 
-        Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        Instantiate(cube, new Vector3(x,1.0f, y), Quaternion.identity);
     }
 
 }
