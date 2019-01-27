@@ -60,8 +60,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Inoyu\Branch\Branch.cs" />
+    <Compile Include="Assets\Inoyu\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Inoyu\Rock\Rock.cs" />
     <Compile Include="Assets\Muroi Yuki\Script\BlowScript.cs" />
     <Compile Include="Assets\Muroi Yuki\Script\MoveScript.cs" />
+    <Compile Include="Assets\Muroi Yuki\Script\ShootingScript.cs" />
+    <Compile Include="Assets\OnamiMasaki\Script\Hp.cs" />
+    <Compile Include="Assets\OnamiMasaki\Script\player.cs" />
+    <Compile Include="Assets\System\FCEI.cs" />
+    <Compile Include="Assets\System\SoundManager.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/yuuki/Documents/ggjfks19d/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
