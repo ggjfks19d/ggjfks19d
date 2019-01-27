@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveScript : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class MoveScript : MonoBehaviour
 
     private float x; //x方向のImputの値
     private float z; //z方向のInputの値
+ 
     Vector3 prePos;
+    public Vector3 diff{ get; private set; }
 
     [SerializeField]Transform model = null;
     
@@ -17,7 +20,7 @@ public class MoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = 5.0f;
+        speed = 6.0f;
     }
 
     // Update is called once per frame
@@ -36,8 +39,8 @@ public class MoveScript : MonoBehaviour
         }
 
         {
-            Vector3 diff = this.gameObject.transform.position - prePos;
-            if(diff.magnitude > 0.10f)
+            diff = this.gameObject.transform.position - prePos;
+            if(diff.magnitude > 0.50f)
             {
                 prePos = this.gameObject.transform.position;
             }
