@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class hoju : MonoBehaviour
 {
     private bool m_HojuFlg;
-    public GameObject takibi;
     Slider m_Slider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +17,21 @@ public class hoju : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //m_Slider.transform.position = new Vector3(takibi.transform.position.x, takibi.transform.position.y + 25.0f, 0.0f);
-
+        //薪("maki")が焚火の補充範囲内に入ったら、燃える時間を60秒分回復する。
         if (m_HojuFlg)
         {
-            m_Slider.value = 1.0f;
+            m_Slider.value += 60.0f / 180.0f;
         }
+        //薪("maki")が焚火の補充範囲外に出たら、燃える時間が180秒で燃え尽きるように減る。
         else
         {
-            m_Slider.value -= 0.0002f;
+            m_Slider.value -= Time.deltaTime / 180.0f;
         }
+
+        m_HojuFlg = false;
     }
 
+    //薪("maki")が焚火の補充範囲内に入ったら、フラグをtrueにする。
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "maki")
@@ -42,11 +45,19 @@ public class hoju : MonoBehaviour
         //}
     }
 
-    void OnTriggerExit(Collider other)
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if(other.gameObject.tag == "maki")
+    //    {
+    //        m_HojuFlg = false;
+    //    }
+    //}
+
+    void OnGUI()
     {
-        if(other.gameObject.tag == "maki")
-        {
-            m_HojuFlg = false;
-        }
+        //焚火の燃える時間
+        float time = m_Slider.value * 180.0f;
+        //GUILayout.Button(time.ToString());
+
     }
 }
