@@ -567,6 +567,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2146302548921247507, guid: c71b4436c78cc784799030d95de71915,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 723566778914593942, guid: c71b4436c78cc784799030d95de71915,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -670,6 +675,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 3
+--- !u!114 &1400088930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400088927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b82c0feff148834aafe6bdf0e540567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cube: {fileID: 1378294652}
+  sx: 19.8
+  sy: 10.8
 --- !u!1 &1481008129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3562004791859634276, guid: e8ca14bd6ef8c1a44a7f1158639f9e72,
@@ -686,6 +706,11 @@ PrefabInstance:
     - target: {fileID: 6116215635506885579, guid: 96e592e06a4f1014f9b4677d8202239d,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6116215635506885579, guid: 96e592e06a4f1014f9b4677d8202239d,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6205618766356188434, guid: 96e592e06a4f1014f9b4677d8202239d,
