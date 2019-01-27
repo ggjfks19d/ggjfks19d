@@ -37,7 +37,7 @@ public class ShootingScript : MonoBehaviour
             bullets.GetComponent<Rigidbody>().AddForce(force);
 
             // 弾丸の位置を調整
-            bullets.transform.position = Muzzle.position;
+            bullets.transform.position = new Vector3(Muzzle.position.x , Muzzle.position.y, Muzzle.position.z);
         }
     }
 }

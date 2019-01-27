@@ -5,7 +5,14 @@ using UnityEngine;
 public class MoveScript : MonoBehaviour
 {
     private float speed;
-    public GameObject Blow;
+
+    private float x; //x方向のImputの値
+    private float z; //z方向のInputの値
+    Vector3 prePos;
+
+    [SerializeField]Transform model = null;
+    
+    //private Rigidbody rigd;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +34,29 @@ public class MoveScript : MonoBehaviour
         {
             transform.position += new Vector3(0.0f, 0.0f, (Input.GetAxis("Vertical") * speed * Time.deltaTime));
         }
-        
-        //Aボタンが押されたらBlowという球体を打ち出してあげたい！
-        if (Input.GetButtonDown("Fire1"))
+
         {
-            Blow = Instantiate(Blow, transform.position + transform.forward * 3 + transform.up * 2, transform.rotation) as GameObject;
+            Vector3 diff = this.gameObject.transform.position - prePos;
+            if(diff.magnitude > 0.10f)
+            {
+                prePos = this.gameObject.transform.position;
+            }
+            model.rotation = Quaternion.LookRotation(diff);
         }
+
+        /*
+        {
+            float dx = prePos.x - this.gameObject.transform.position.x;
+            float dz = prePos.z - this.gameObject.transform.position.z;
+
+            prePos = this.gameObject.transform.position;
+
+            if (dx != 0 || dz != 0)
+            {
+                float t = Mathf.Atan(dz / dx);
+                model.Rotate(new Vector3(0, t, 0));
+            }
+        }
+        */
     }
 }
