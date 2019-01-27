@@ -15,6 +15,7 @@ public class EnemySerch : MonoBehaviour
     {
         Idle = 1,
         Follow = 2,
+        Wait = 3
     }
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class EnemySerch : MonoBehaviour
     {
         switch (CurrentMoveMode)
         {
-            case MoveMode.Idle:
+            case MoveMode.Wait:
                 break;
             case MoveMode.Follow:
                 if (followTarget != null)
