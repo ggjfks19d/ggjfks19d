@@ -99,10 +99,10 @@ public class FadeManager : MonoBehaviour
 			sprite.color = new Color(color.r, color.g, color.b, 1);
 		}
 
-		// 終了コールバックの実行 
-		if(Callback != null){ Callback(); }
-
 		// ロック解除 
 		isPlaying = false;
+
+		// 終了コールバックの実行 
+		if(Callback != null) { Callback(); }
 	}
 }
