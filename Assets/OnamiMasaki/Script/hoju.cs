@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class hoju : MonoBehaviour
 {
+
     private bool m_HojuFlg;
     Slider m_Slider;
 

@@ -8,6 +8,7 @@ public class Hp : MonoBehaviour
     //[SerializeField]Transform camera;
     //[SerializeField]Transform target;
 
+
     Slider m_Slider;
     float m_Hp = 0;
     bool m_healFlg = false;
