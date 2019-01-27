@@ -662,8 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99793a7d4435a40429b20affdd73215b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
-  Muzzle: {fileID: 0}
+  Bullet: {fileID: 3562004791859634276, guid: e8ca14bd6ef8c1a44a7f1158639f9e72, type: 3}
+  Muzzle: {fileID: 1204098132}
   Bulletspeed: 1000
 --- !u!4 &227470433
 Transform:
