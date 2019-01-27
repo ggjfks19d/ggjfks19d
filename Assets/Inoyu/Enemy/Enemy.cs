@@ -17,16 +17,16 @@ public class Enemy : MonoBehaviour
         t = GameObject.Find("Player").transform;
         //GameObject.Find("Player").transform.position = new Vector3(tmp.x, tmp.y, tmp.z);
         
-        for (int i = 0; i < 10; i++) {
+        //for (int i = 0; i < 10; i++) {
 
-            float x = Random.Range(-5.0f, 5.0f);
-            float y = Random.Range(-5.0f, 5.0f);
+        //    float x = Random.Range(-5.0f, 5.0f);
+        //    float y = Random.Range(-5.0f, 5.0f);
 
-            Instantiate(cube, new Vector2(x, y), Quaternion.identity);
+        //    Instantiate(cube, new Vector2(x, y), Quaternion.identity);
 
-            // 初期位置保存
-            playerpos = t.position;
-        }
+        //    // 初期位置保存
+        //    playerpos = t.position;
+        //}
 
     }
 
@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
     }
     void GenerateRight()
     {
+
         float x = Random.Range(sx, sx / 2);
         float y = Random.Range(sy / 2, -sy / 2);
 
