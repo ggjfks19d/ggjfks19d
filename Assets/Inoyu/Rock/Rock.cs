@@ -4,56 +4,132 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    public GameObject cube;
-    Transform t;
-    Transform e;
+	//--------------------------------------------------------------------------------
+	// メンバ変数  
+	//--------------------------------------------------------------------------------
+	Transform tf;	// 自身のTransformへのアクセスを早くするために保持 
+
+	public GameObject cube;
+    Transform player;
 
     [SerializeField] float sx;
-    [SerializeField] float sy;
+    [SerializeField] float sz;
 
+	// 出現させたエミッタ―(自身のコピー)の位置リスト 
+	static List<Transform> copyList = new List<Transform>();
 
-    // Start is called before the first frame update
-    void Start()
+	//--------------------------------------------------------------------------------
+	// 初期化 
+	//--------------------------------------------------------------------------------
+	void Start()
     {
-        t = GameObject.Find("Player").transform;
-        e = GameObject.Find("Empty").transform;
+		// 高速化用のTransform保持  
+		tf = this.gameObject.transform;
 
+		// 自身をコピーリストに加えておく 
+		copyList.Add(tf);
 
-        //10体増やす
-        for (int i = 0; i < 10; i++)
-        {
-            float x = Random.Range(-sx, sx);
-            float y = Random.Range(-sy, sy);
-
-            Instantiate(cube, new Vector2(x / 2, y / 2), Quaternion.identity);
-        }
+		// プレイヤーを取得 
+        player = GameObject.Find("Player").transform;
     }
 
-    // Update is called once per frame
-    void Update()
+	//--------------------------------------------------------------------------------
+	// 終了処理  
+	//--------------------------------------------------------------------------------
+	void OnDestroy()
+	{
+		copyList.Remove(tf);
+	}
+
+
+	//--------------------------------------------------------------------------------
+	// 更新 
+	//--------------------------------------------------------------------------------
+	void Update()
     {
-        
+		if(IsNearPlayer())
+		{
+			// 画面にランダムに障害物を生成 
+			if(copyList.Count > 1){ GenerateScreen(); }
+
+			// 上下左右位置画面分先に自身を複製 
+			CopySelfDiff(new Vector3( sx, 0,   0));
+			CopySelfDiff(new Vector3(  0, 0,  sz));
+			CopySelfDiff(new Vector3(-sx, 0,   0));
+			CopySelfDiff(new Vector3(  0, 0, -sz));
+
+			// 本体は眠る 
+			this.gameObject.SetActive(false);
+		}        
     }
 
-    void GenerateScreen()
+	//--------------------------------------------------------------------------------
+	// 1画面分の障害物を生成 
+	//--------------------------------------------------------------------------------
+	void GenerateScreen()
     {
-        
+		int count = Random.Range(0, 8);
+		for(int i=0; i<count; i++)
+		{
+			float x = Random.Range(-sx/2, sx/2) + tf.position.x;
+			float y = tf.position.y;
+			float z = Random.Range(-sz/2, sz/2) + tf.position.z;
 
-    }
+			Instantiate(cube, new Vector3(x, y, z), Quaternion.identity);
+		}
+	}
 
-    void GenerateRockRight()
-    {
-        
-        //float x = Random.Range(sx, sx / 2);
-        //float y = Random.Range(sy / 2, -sy / 2);
-        //if (-(t.position.x - e.position.x) < sx)
-        //{
+	//--------------------------------------------------------------------------------
+	// プレイヤーが近づいているか判定 
+	//--------------------------------------------------------------------------------
+	bool IsNearPlayer()
+	{
+		float dx = Mathf.Abs(player.position.x - tf.position.x);
+		float dz = Mathf.Abs(player.position.z - tf.position.z);
 
-        //    Instantiate(cube, new Vector2(x, y), Quaternion.identity);
-        //}
-    }
-    void GenerateRockLeft()
-    {
-        
-    }
+		return (dx < sx && dz < sz);
+	}
+
+	//--------------------------------------------------------------------------------
+	// 自身をdistだけずらした位置に複製 
+	//--------------------------------------------------------------------------------
+	void CopySelfDiff(Vector3 diff)
+	{
+		Vector3 targetPos = tf.position + diff;
+
+		if(IsCopy(targetPos) == false)
+		{
+			GameObject obj = Instantiate(this.gameObject, targetPos, Quaternion.identity);
+			obj.name = string.Format("({0}, {1}, {2})", targetPos.x, targetPos.y, targetPos.z);
+		}
+	}
+
+	//--------------------------------------------------------------------------------
+	// 指定した場所にコピーがいるかどうか判定 
+	//--------------------------------------------------------------------------------
+	bool IsCopy(Vector3 pos)
+	{
+		foreach(Transform copy in copyList)
+		{
+			bool x = (int)(copy.position.x) == (int)(pos.x);
+			bool y = (int)(copy.position.y) == (int)(pos.y);
+			bool z = (int)(copy.position.z) == (int)(pos.z);
+
+			if(x && y && z){ return true; } 
+		}
+
+		return false;
+	}
+
+	//--------------------------------------------------------------------------------
+	// Debug 
+	//--------------------------------------------------------------------------------
+	//private void OnGUI()
+	//{
+	//	for(int i=0; i<copyList.Count; i++)
+	//	{
+	//		Vector3 pos = copyList[i].position;
+	//		GUILayout.Label(string.Format("({0}, {1}, {2})", pos.x, pos.y, pos.z));
+	//	}
+	//}
 }
