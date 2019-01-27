@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class BulletDestroyScript : MonoBehaviour
 {
-    public GameObject Bullet;
-    public float time = 2.0f;
+    public float time = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(Bullet,time);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
+        Destroy(this.gameObject, time);
     }
 }

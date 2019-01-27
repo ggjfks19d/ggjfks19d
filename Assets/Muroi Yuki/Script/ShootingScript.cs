@@ -14,11 +14,13 @@ public class ShootingScript : MonoBehaviour
     // 弾丸の速度
     public float Bulletspeed = 1000;
 
-    public float time = 2.0f;
+    // 移動スクリプト 
+    MoveScript moveScript = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        //Destroy(Bullet, time);
+        moveScript = this.gameObject.GetComponent<MoveScript>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,9 @@ public class ShootingScript : MonoBehaviour
         //    Instantiate(Bullet, transform.position, Quaternion.identity);
         //}
         
+        //moveScript.diff 
+
+
 
         // z キーが押された時
         if (Input.GetButtonDown("Fire1"))

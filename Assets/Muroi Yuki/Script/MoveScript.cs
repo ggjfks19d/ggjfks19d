@@ -11,6 +11,7 @@ public class MoveScript : MonoBehaviour
     private float z; //z方向のInputの値
  
     Vector3 prePos;
+    public Vector3 diff{ get; private set; }
 
     [SerializeField]Transform model = null;
     
@@ -38,7 +39,7 @@ public class MoveScript : MonoBehaviour
         }
 
         {
-            Vector3 diff = this.gameObject.transform.position - prePos;
+            diff = this.gameObject.transform.position - prePos;
             if(diff.magnitude > 0.50f)
             {
                 prePos = this.gameObject.transform.position;
