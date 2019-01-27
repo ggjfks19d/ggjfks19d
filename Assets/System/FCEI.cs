@@ -175,6 +175,19 @@ namespace FCEI
 
 			return ret;
 		}
+
+
+
+		//----------------------------------------
+		// @description
+		//		指定したオブジェクトの子オブジェクトを全部消す 
+		public static void ClearChild (GameObject obj)
+		{
+			Transform t = obj.transform;
+			for(int i=t.childCount-1; i>=0; i--){
+				GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+			}
+		}
 	}
 
 

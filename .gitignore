@@ -3,5 +3,7 @@ Packages/
 Temp/
 obj/
 .vs/
-ggjfks19d.sln
+*.sln
 *.csproj
+Assets/Sound/
+Assets/Sound.meta
