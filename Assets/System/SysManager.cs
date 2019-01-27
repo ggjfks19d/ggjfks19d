@@ -20,7 +20,8 @@ public class SysManager : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	// メンバ変数 
 	//--------------------------------------------------------------------------------
-	static SysManager instance;           // シングルトンインスタンス
+	static SysManager instance;		// シングルトンインスタンス
+	static float playTime = 0;		// メインを遊んだ時間(リザルト用) 
 
 	//--------------------------------------------------------------------------------
 	// コンストラクタ 
@@ -28,11 +29,11 @@ public class SysManager : MonoBehaviour
 	void Awake()
 	{
 		// シングルトン作成 
-		if(instance == null) {
+		if(instance == null){
 			instance = this;
 			DontDestroyOnLoad(this.gameObject);
 		}
-		else {
+		else{
 			GameObject.Destroy(this.gameObject);
 		}
 	}
@@ -45,10 +46,11 @@ public class SysManager : MonoBehaviour
 		SceneManager.LoadScene("Title");
 		yield return null;
 
-		//while(true) 
-		//{
-		//	yield return null;
-		//}
+		while(true) 
+		{
+			playTime += Time.deltaTime;
+			yield return null;
+		}
 	}
 
 	//--------------------------------------------------------------------------------
@@ -76,8 +78,9 @@ public class SysManager : MonoBehaviour
 		// フェードしてメインへ 
 		FadeManager.FadeOut(FADE_SPEED,
 			() => {
-				SceneManager.LoadScene("Main");
+				SceneManager.LoadScene("MainScene");
 				FadeManager.FadeIn(FADE_SPEED);
+				playTime = 0;
 			}
 		);
 	}
