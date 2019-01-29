@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
         //    // 初期位置保存
         //    playerpos = t.position;
         //}
-
     }
 
     // Update is called once per frame
