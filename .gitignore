@@ -7,3 +7,4 @@ obj/
 *.csproj
 Assets/Sound/
 Assets/Sound.meta
+_Slack/
