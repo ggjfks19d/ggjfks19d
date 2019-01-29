@@ -12,8 +12,9 @@ public class Rock : MonoBehaviour
 	public GameObject cube;
     Transform player;
 
-    [SerializeField] float sx;
-    [SerializeField] float sz;
+    [SerializeField]float sx;
+    [SerializeField]float sz;
+	[SerializeField]int emitNum;
 
 	// 出現させたエミッタ―(自身のコピー)の位置リスト 
 	static List<Transform> copyList = new List<Transform>();
@@ -68,7 +69,7 @@ public class Rock : MonoBehaviour
 	//--------------------------------------------------------------------------------
 	void GenerateScreen()
     {
-		int count = Random.Range(0, 8);
+		int count = Random.Range(0, emitNum);
 		for(int i=0; i<count; i++)
 		{
 			float x = Random.Range(-sx/2, sx/2) + tf.position.x;
