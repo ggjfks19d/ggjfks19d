@@ -76,10 +76,34 @@ public class SoundManager : MonoBehaviour
 		if(instance == null){ Debug.LogError("Instance is null."); return; }
 
 		AudioSource a = instance.seList[(int)id];
-		if(a != null && a.clip != null) { a.Play(); }
+		if(a != null && a.clip != null){ a.Play(); }
 	}
 
+	//--------------------------------------------------------------------------------
+	// SE再生確認 
+	//--------------------------------------------------------------------------------
+	public static bool IsPlayingSE(SE id)
+	{
+		if(instance == null){ Debug.LogError("Instance is null."); return false; }
 
+		AudioSource a = instance.seList[(int)id];
+		if(a != null && a.clip != null){ return a.isPlaying; }
+
+		return false;
+	}
+
+	//--------------------------------------------------------------------------------
+	// SE停止 
+	//--------------------------------------------------------------------------------
+	public static void StopSE(SE id)
+	{
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
+		AudioSource a = instance.seList[(int)id];
+		if(a != null && a.clip != null){ a.Stop(); }
+	}
+
+	
 
 	//--------------------------------------------------------------------------------
 	// BGM再生 
@@ -91,30 +115,41 @@ public class SoundManager : MonoBehaviour
 		if(!isMix){ StopBGM(); }
 
 		AudioSource a = instance.bgmList[(int)id];
-		if(a != null && a.clip != null) { a.Play(); }
+		if(a != null && a.clip != null){ a.Play(); }
 	}
 
+	//--------------------------------------------------------------------------------
+	// BGM再生確認 
+	//--------------------------------------------------------------------------------
+	public static bool IsPlayingBGM(BGM id, bool isMix = false)
+	{
+		if(instance == null){ Debug.LogError("Instance is null."); return false; }
 
+		AudioSource a = instance.bgmList[(int)id];
+		if(a != null && a.clip != null){ return a.isPlaying; }
+
+		return false;
+	}
 
 	//--------------------------------------------------------------------------------
 	// BGM停止 
 	//--------------------------------------------------------------------------------
-	public static void StopBGM()
-	{
-		if(instance == null){ Debug.LogError("Instance is null."); return; }
-
-		// すべて停止 
-		for(int i=0; i<instance.bgmList.Length; i++)
-		{
-			StopBGM((BGM)i);
-		}
-	}
 	public static void StopBGM(BGM id)
 	{
 		if(instance == null){ Debug.LogError("Instance is null."); return; }
 
 		AudioSource a = instance.bgmList[(int)id];
 		if(a != null && a.clip != null){ a.Stop(); }
+	}
+	public static void StopBGM()
+	{
+		if(instance == null){ Debug.LogError("Instance is null."); return; }
+
+		// すべて停止 
+		for(int i = 0; i < instance.bgmList.Length; i++)
+		{
+			StopBGM((BGM)i);
+		}
 	}
 
 
